@@ -1,0 +1,29 @@
+---
+title: "Getting OpenAI API Error While Using Groq API for Python Coding Agent"
+date: "2024-08-11T05:35:07.322Z"
+author: "joeshmo3"
+taga : ['next.js', 'nextjs']
+
+---
+I am trying to create a Python coding agent using the crewai library along with langchain and ChatGroq. My code is supposed to use the Groq API for language model processing, but I am encountering an error related to OpenAI's API instead.
+
+```js
+import logging
+from crewai import Agent, Task, Crew, Process
+from langchain.agents import Tool
+from langchain_experimental.utilities import PythonREPL
+from langchain_community.tools.ddg_search.tool import DuckDuckGoSearchRun
+from langchain_groq import ChatGroq
+
+# Ensure correct API key and model are set
+llm = ChatGroq(temperature=0, api_key="MY_API_KEY", model="llama3-70b-8192")
+
+# Create the Python REPL tool
+python_repl = PythonREPL()
+python_repl_tool = Tool(
+    name="python_repl",
+    description="A Python shell. Use this to execute python commands. Input should be a valid python command. If you want to see the output of a value, you should print it out with `print(...)`.",
+    func=python_repl.run,
+)
+
+```
