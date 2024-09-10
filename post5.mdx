@@ -1,28 +1,12 @@
 ---
-title: "Getting OpenAI API Error While Using Groq API for Python Coding Agent"
+title: "Two forms of pre-rending"
 date: "2024-08-11T05:35:07.322Z"
 author: "joeshmo3"
 tags: ['js', 'javascript']
 ---
-I am trying to create a Python coding agent using the crewai library along with langchain and ChatGroq. My code is supposed to use the Groq API for language model processing, but I am encountering an error related to OpenAI's API instead.
+Next.js has two forms of pre-rendering: **Static Generation** and **Server-side Rendering**. The difference is in **when** it generates the HTML for a page.
 
-```js
-import logging
-from crewai import Agent, Task, Crew, Process
-from langchain.agents import Tool
-from langchain_experimental.utilities import PythonREPL
-from langchain_community.tools.ddg_search.tool import DuckDuckGoSearchRun
-from langchain_groq import ChatGroq
+- **Static Generation** is the pre-rendering method that generates the HTML at **build time**. The pre-rendered HTML is then _reused_ on each request.
+- **Server-side Rendering** is the pre-rendering method that generates the HTML on **each request**.
 
-# Ensure correct API key and model are set
-llm = ChatGroq(temperature=0, api_key="MY_API_KEY", model="llama3-70b-8192")
-
-# Create the Python REPL tool
-python_repl = PythonREPL()
-python_repl_tool = Tool(
-    name="python_repl",
-    description="A Python shell. Use this to execute python commands. Input should be a valid python command. If you want to see the output of a value, you should print it out with `print(...)`.",
-    func=python_repl.run,
-)
-
-```
+Importantly, Next.js lets you **choose** which pre-rendering form to use for each page. You can create a "hybrid" Next.js app by using Static Generation for most pages and using Server-side Rendering for others.
